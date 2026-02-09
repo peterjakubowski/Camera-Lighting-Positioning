@@ -1,43 +1,81 @@
-# Camera and Lighting Positioning
+# Camera and Lighting Positioning Calculator
 
-Tool to calculate and visualize camera and lighting distances for flat art and copywork setups.
+"Measure twice, setup once."
 
-1). Given a camera, lens, and object (usually flat works like flat art on paper, paintings, prints, etc.), determine the camera position for a chosen output resolution. The distance between camera and object is returned.
+This tool is designed to assist photographers, archivists, and digitization specialists in calculating and visualizing the precise geometry required for flat art reproduction and copy work.
 
-2). Given an object, determine the position of lights (a minimum of two, one on each side of the object).
+Achieving a specific resolution (PPI) while ensuring even lighting coverage involves complex relationships between sensor size, focal length, and physical distances. This Streamlit application automates the math, allowing you to plan your studio setup before moving a single light stand.
 
-## Using the tool
+## Key Features
+
+* **Precision Positioning:** Calculate the exact distance required between the camera sensor and the artwork to achieve a target PPI.  
+* **Lighting Geometry:** Determine optimal light placement (X and Y coordinates relative to the art) to ensure full coverage based on the artwork's dimensions.  
+* **Sensor Visualization:** Visual feedback on how much of the camera sensor is utilized by the artwork.  
+* **Resolution Limits:** Instantly see the maximum possible PPI for a given lens/camera combination before hitting physical limits.  
+* **Diagram Generation:** Auto-generates a downloadable Matplotlib diagram of your specific setup.
+
+## Quick Start
 
 ### Streamlit Community Cloud
 
-Use the app on Streamlit Community Cloud: [https://camera-lighting-positioning.streamlit.app/](https://camera-lighting-positioning.streamlit.app/)
+You can use the live application on Streamlit Community Cloud:
 
-### Install Locally
+[https://camera-lighting-positioning.streamlit.app/](https://camera-lighting-positioning.streamlit.app/)
 
-Clone the repository and launch the streamlit app in your web browser from you cli.
+### Local Installation
 
-```commandline
-streamlit run app.py
-```
+To run the tool on your own machine, follow these steps:
 
-### Enter Parameters:
-* camera: Choose a camera or digital back from the dictionary of cameras
-* lens_focal_len_mm: Select the focal length of the lens in millimeters
-* real_object_units: Select the unit of measurement used to measure the width and height of the artwork
-* real_object_width: Width of the artwork in units selected in real_object_units
-* real_object_height: Height of the artwork in units selected in real_object_units
-* set_ppi: Set to desired resolution in pixels per inch
-* radius_multiply: Set to desired radius multiplier to control light coverage. A value of 1 will set light coverage to fit object at 100%. Increase multiplier to expand light coverage and reduce vignetting in image area.
+1. **Clone the repository:**  
+   ```commandline
+   git clone [https://github.com/peterjakubowski/Camera-Lighting-Positioning.git](https://github.com/peterjakubowski/Camera-Lighting-Positioning.git)  
+   cd Camera-Lighting-Positioning
+   ```
 
-### Output:
-* Sensor usage in percent for width and height
-* MAX PPI: The maximum ppi value possible with selected camera and focal length when fitting the whole artwork within
-* 5% Fit PPI: The maximum ppi value possible reduced by 5%
-* Dimensions: The output image dimensions in pixels (widthxheight)
-* PPI: The ppi value set in set_ppi
-* Camera: The camera or digital back being used
-* Sensor size: The camera's sensor size in millimeters(mm) and pixels(px)
-* Focal length: The focal length of the lens in millimeters(mm)
-* Camera distance: Distance from the camera to the center of the artwork in millimeters(mm), centimeters(cm), inches(in), and feet(ft) and inches(in)
-* Lights distance x: Distance from the light to the center of the artwork on the x-axis (artwork plane) in millimeters(mm), centimeters(cm), inches(in), and feet(ft) and inches(in)
-* Lights distance y: Distance from the light to the center of the artwork on the y-axis (lens plane) in millimeters(mm), centimeters(cm), inches(in), and feet(ft) and inches(in)
+2. **Install dependencies:**  
+   It is recommended to use a virtual environment.  
+   ```commandline
+   pip install -r requirements.txt
+   ```
+
+3. **Launch the App:**  
+   ```commandline
+   streamlit run app.py
+   ```
+
+## User Guide
+
+### 1. Configure Equipment
+
+* **Camera Body / Digital Back:** Select your camera from the dropdown menu.  
+  * *Note: If your camera is not listed, you can add it manually to data/sensors.json.*  
+* **Lens Focal Length:** Choose the focal length of the lens you intend to use (in mm).
+
+### 2. Define the Artwork
+
+* **Dimensions:** Enter the physical width and height of the flat art.  
+* **Units:** Toggle between Millimeters (mm), Centimeters (cm), or Inches.
+
+### 3. Set Targets
+
+* **Resolution (PPI):** Input your desired output resolution (e.g., 300 for print, 600 for archive). The app will calculate the distance required to achieve this pixel density.  
+* **Light Coverage:** Adjust the radius multiplier.  
+  * *1.0*: Lights are positioned to exactly cover the corners of the art (high risk of falloff/vignetting).  
+  * *\>1.0*: Moves lights further out to ensure even illumination across the entire surface.
+
+### 4. Interpret the Output
+
+The app provides a data table and a visual diagram. Here is how to read the measurements:
+
+* **Camera Distance:** The distance from the *sensor plane* to the center of the artwork.  
+* **Lights Distance X:** How far the lights should be placed to the left/right of the artwork's center (parallel to the wall).  
+* **Lights Distance Y:** How far the lights should be placed back from the artwork (perpendicular to the wall).  
+* **Sensor Usage:** Percentage of the sensor filled by the artwork. If this is >100%, the art will not fit in the frame, and a warning will appear.  
+* **MAX PPI:** The theoretical maximum resolution you can achieve with the current lens/camera combo if you filled the frame completely.
+
+## Tech Stack
+
+* **Streamlit:** UI and interactivity.  
+* **Matplotlib:** Dynamic generation of lighting diagrams.  
+* **Pydantic:** Data validation for sensor models.  
+* **Pandas:** Data presentation.
