@@ -7,7 +7,13 @@
   },
   "Nikon D850":{
     "sensor_w_mm": 35.9,
-    "sensor_h_mm" : 24.9,
+    "sensor_h_mm" : 23.9,
+    "sensor_w_px": 8256,
+    "sensor_h_px": 5504
+  },
+  "Nikon Z9":{
+    "sensor_w_mm": 35.9,
+    "sensor_h_mm" : 23.9,
     "sensor_w_px": 8256,
     "sensor_h_px": 5504
   },
@@ -23,11 +29,29 @@
     "sensor_w_px": 8688,
     "sensor_h_px": 5792
   },
+  "Canon R5 Mark II":{
+    "sensor_w_mm": 36,
+    "sensor_h_mm" : 24,
+    "sensor_w_px": 8192,
+    "sensor_h_px": 5464
+  },
+  "Canon R6 Mark III":{
+    "sensor_w_mm": 35.9,
+    "sensor_h_mm" : 23.9,
+    "sensor_w_px": 6960,
+    "sensor_h_px": 4640
+  },
   "Phase One P30+":{
     "sensor_w_mm": 44.2,
     "sensor_h_mm" : 33.1,
     "sensor_w_px": 6496,
     "sensor_h_px": 4872
+  },
+  "Phase One IQ3 100MP":{
+    "sensor_w_mm": 53.7,
+    "sensor_h_mm" : 40.4,
+    "sensor_w_px": 11608,
+    "sensor_h_px": 8708
   },
   "Phase One IQ4 150MP":{
     "sensor_w_mm": 53.4,
