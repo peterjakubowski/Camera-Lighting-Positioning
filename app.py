@@ -2,7 +2,7 @@
 #
 # Author: Peter Jakubowski
 # Date: 2/14/2025
-# Description:
+# Description: Calculate camera and lighting distances for flat art and copywork setups.
 #
 
 import streamlit as st
@@ -37,7 +37,12 @@ with open("data/sensors.json", "r") as file:
 # ========= Streamlit ==========
 # ==============================
 
-st.header('Camera and Lighting Positioning')
+st.set_page_config(
+    page_title="Camera and Lighting Positioning",
+    layout="centered"
+)
+
+st.title('Camera and Lighting Positioning')
 
 st.write('Calculate camera and lighting distances for flat art and copywork setups.')
 
