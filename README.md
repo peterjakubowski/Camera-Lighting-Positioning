@@ -1,6 +1,6 @@
 # Camera and Lighting Positioning Calculator
 
-"Measure twice, setup once."
+"Measure twice. Light once."
 
 This tool is designed to assist photographers, archivists, and digitization specialists in calculating and visualizing the precise geometry required for flat art reproduction and copy work.
 
