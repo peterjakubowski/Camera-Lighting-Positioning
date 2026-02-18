@@ -100,7 +100,16 @@ with (st.sidebar):
                     value=300
                     )
 
-    # Set to desired radius multiplier to control light coverage.
+    # set the lighting angle, defaults to standard (~38)
+    st.slider(label="Light angle (degrees)",
+              key="light_angle",
+              min_value=15.0,
+              max_value=45.0,
+              step=0.1,
+              value=38.7
+              )
+
+    # set to desired radius multiplier to control light coverage.
     st.slider(label="Light coverage",
               key="radius_multiply",
               min_value=1.0,
@@ -173,6 +182,7 @@ if object_h_on_film_mm > sensor.sensor_h_mm:
 
 lighting_diagram, light_1x, light_1y = plot_lighting_diagram(real_object_width,
                                                              real_object_height,
+                                                             st.session_state.light_angle,
                                                              st.session_state.radius_multiply,
                                                              distance,
                                                              max_w_in,

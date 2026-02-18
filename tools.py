@@ -12,6 +12,7 @@ from fractions import Fraction
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import matplotlib.lines as lines
+import math
 
 
 def calculate_max_ppi(sensor, real_object_width, real_object_height):
@@ -76,7 +77,7 @@ def print_measurements(measurements: tuple[float, float, float]) -> str:
     return string
 
 
-def plot_lighting_diagram(real_object_width, real_object_height, radius_multiply, distance, max_w_in, max_h_in):
+def plot_lighting_diagram(real_object_width, real_object_height, light_angle_degrees, radius_multiply, distance, max_w_in, max_h_in):
     """
     Plots the lighting diagram using Matplotlib with emojis.
     """
@@ -107,6 +108,11 @@ def plot_lighting_diagram(real_object_width, real_object_height, radius_multiply
     # Radius calculation
     radius = (real_object_width * radius_multiply) / 2
 
+    # Convert degrees to radians for Python's math functions
+    angle_radians = math.radians(light_angle_degrees)
+
+    y_multiplier = 2.5 * math.tan(angle_radians)
+
     # Add a yellow circle between the lights
     circle = patches.Circle((0, 0), radius=radius, color='#FFD700', alpha=0.2)
     ax.add_patch(circle)
@@ -124,7 +130,7 @@ def plot_lighting_diagram(real_object_width, real_object_height, radius_multiply
 
     # Light 1 arrow
     light_1x = radius * 2.5
-    light_1y = radius * 2
+    light_1y = radius * y_multiplier  # 2
     ax.arrow(light_1x, light_1y, -light_1x * 0.95, -light_1y * 0.95,  # Changed start and end points
              lw=1.5, color='#000000',
              head_width=0.35, head_length=0.6,  # Reduced head size
@@ -137,7 +143,7 @@ def plot_lighting_diagram(real_object_width, real_object_height, radius_multiply
 
     # Light 2 arrow
     light_2x = -radius * 2.5
-    light_2y = radius * 2
+    light_2y = radius * y_multiplier  # 2
     ax.arrow(light_2x, light_2y, -light_2x * 0.95, -light_2y * 0.95,  # Changed start and end points
              lw=1.5, color='#000000',
              head_width=0.35, head_length=0.6,  # Reduced head size
