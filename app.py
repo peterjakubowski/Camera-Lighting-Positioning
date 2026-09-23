@@ -5,11 +5,18 @@
 # Description: Calculate camera and lighting distances for flat art and copywork setups.
 #
 
-import streamlit as st
-import pandas as pd
 from io import BytesIO
+
+import pandas as pd
+import streamlit as st
+
 from src.utils.loader import sensors
-from src.utils.tools import convert_units, print_measurements, plot_lighting_diagram, calculate_max_ppi
+from src.utils.tools import (
+    calculate_max_ppi,
+    convert_units,
+    plot_lighting_diagram,
+    print_measurements,
+)
 
 # ==============================
 # ========= Streamlit ==========
@@ -96,62 +103,62 @@ with (st.sidebar):
               value=3.0
               )
 
-    # ==============================
-    # ========= Calculate ==========
-    # ==============================
+# ==============================
+# ========= Calculate ==========
+# ==============================
 
-    sensor = sensors[st.session_state.camera]
-    sensor_ratio = sensor.sensor_w_px / sensor.sensor_h_px
+sensor = sensors[st.session_state.camera]
+sensor_ratio = sensor.sensor_w_px / sensor.sensor_h_px
 
-    # convert real object width and height to inches if provided in cm or mm
-    if st.session_state.real_object_units == 'cm':
-        real_object_width = st.session_state.real_object_width * 0.393701
-        real_object_height = st.session_state.real_object_height * 0.393701
+# convert real object width and height to inches if provided in cm or mm
+if st.session_state.real_object_units == 'cm':
+    real_object_width = st.session_state.real_object_width * 0.393701
+    real_object_height = st.session_state.real_object_height * 0.393701
 
-    elif st.session_state.real_object_units == 'mm':
-        real_object_width = st.session_state.real_object_width * 0.0393701
-        real_object_height = st.session_state.real_object_height * 0.0393701
+elif st.session_state.real_object_units == 'mm':
+    real_object_width = st.session_state.real_object_width * 0.0393701
+    real_object_height = st.session_state.real_object_height * 0.0393701
 
-    else:
-        real_object_width = st.session_state.real_object_width
-        real_object_height = st.session_state.real_object_height
+else:
+    real_object_width = st.session_state.real_object_width
+    real_object_height = st.session_state.real_object_height
 
-    # check max ppi
-    if st.session_state.set_ppi > (max_ppi := calculate_max_ppi(sensor, real_object_width, real_object_height)):
-        st.warning((f"Warning! The object does not fit in frame at {st.session_state.set_ppi}ppi. "
-                    f"The maximum possible ppi is {max_ppi}"))
+# check max ppi
+if st.session_state.set_ppi > (max_ppi := calculate_max_ppi(sensor, real_object_width, real_object_height)):
+    st.warning(f"Warning! The object does not fit in frame at {st.session_state.set_ppi}ppi. "
+               f"The maximum possible ppi is {max_ppi}")
 
-    # calculate object width and height in pixels by multiplying ppi by object measurements in inches
-    object_w_px = int(st.session_state.set_ppi * real_object_width)
-    object_h_px = int(st.session_state.set_ppi * real_object_height)
+# calculate object width and height in pixels by multiplying ppi by object measurements in inches
+object_w_px = int(st.session_state.set_ppi * real_object_width)
+object_h_px = int(st.session_state.set_ppi * real_object_height)
 
-    # calculate object width and height in mm on sensor by multiplying sensor size in mm by object
-    # size in pixels and dividing by the sensor size in pixels
-    object_w_on_film_mm = (sensor.sensor_w_mm * object_w_px) / sensor.sensor_w_px
-    object_h_on_film_mm = (sensor.sensor_h_mm * object_h_px) / sensor.sensor_h_px
+# calculate object width and height in mm on sensor by multiplying sensor size in mm by object
+# size in pixels and dividing by the sensor size in pixels
+object_w_on_film_mm = (sensor.sensor_w_mm * object_w_px) / sensor.sensor_w_px
+object_h_on_film_mm = (sensor.sensor_h_mm * object_h_px) / sensor.sensor_h_px
 
-    # calculate object resolution by dividing object in pixels by object in inches (should equal set_ppi value)
-    PPI = object_w_px / real_object_width
+# calculate object resolution by dividing object in pixels by object in inches (should equal set_ppi value)
+PPI = object_w_px / real_object_width
 
-    # calculate camera distance to object by multiplying object width by lens focal length and dividing
-    # by object size on sensor
-    distance = (real_object_width * st.session_state.lens_focal_len_mm) / object_w_on_film_mm
-    # distance_ft_in = int(distance/12)
+# calculate camera distance to object by multiplying object width by lens focal length and dividing
+# by object size on sensor
+distance = (real_object_width * st.session_state.lens_focal_len_mm) / object_w_on_film_mm
+# distance_ft_in = int(distance/12)
 
-    # calculate sensor usage
-    sensor_usage_w = round((object_w_on_film_mm / sensor.sensor_w_mm) * 100, 2)
-    sensor_usage_h = round((object_h_on_film_mm / sensor.sensor_h_mm) * 100, 2)
-    max_w_in = sensor.sensor_w_px / PPI
-    max_h_in = sensor.sensor_h_px / PPI
+# calculate sensor usage
+sensor_usage_w = round((object_w_on_film_mm / sensor.sensor_w_mm) * 100, 2)
+sensor_usage_h = round((object_h_on_film_mm / sensor.sensor_h_mm) * 100, 2)
+max_w_in = sensor.sensor_w_px / PPI
+max_h_in = sensor.sensor_h_px / PPI
 
-    # check light coverage
-    if (real_object_width * st.session_state.radius_multiply) / 2 < max_w_in / 2:
-        _radius = st.session_state.radius_multiply + 0.05
-        while (real_object_width * _radius) / 2 < max_w_in / 2:
-            _radius += 0.05
+# check light coverage
+if (real_object_width * st.session_state.radius_multiply) / 2 < max_w_in / 2:
+    _radius = st.session_state.radius_multiply + 0.05
+    while (real_object_width * _radius) / 2 < max_w_in / 2:
+        _radius += 0.05
 
-        st.warning("Warning! The light coverage does not cover the entire viewing area. "
-                   f"Increase light coverage to a minimum of {round(_radius, 2)}")
+    st.warning("Warning! The light coverage does not cover the entire viewing area. "
+               f"Increase light coverage to a minimum of {round(_radius, 2)}")
 
 if object_w_on_film_mm > sensor.sensor_w_mm:
     st.warning("Warning! The object width does not fit in frame.")
