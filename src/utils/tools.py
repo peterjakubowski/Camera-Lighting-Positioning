@@ -6,13 +6,13 @@
 #
 
 
-from typing import Literal
-from numpy import floor
-from fractions import Fraction
-import matplotlib.pyplot as plt
-import matplotlib.patches as patches
-import matplotlib.lines as lines
 import math
+from fractions import Fraction
+from typing import Literal
+
+import matplotlib.pyplot as plt
+from matplotlib import lines, patches
+from numpy import floor
 
 
 def calculate_max_ppi(sensor, real_object_width, real_object_height):
@@ -79,11 +79,11 @@ def print_measurements(measurements: tuple[float, float, float]) -> str:
 
 def plot_lighting_diagram(real_object_width, real_object_height, light_angle_degrees, radius_multiply, distance, max_w_in, max_h_in):
     """
-    Plots the lighting diagram using Matplotlib with emojis.
+    Plots the lighting diagram using Matplotlib.
     """
 
     # Create a figure and axes
-    fig, ax = plt.subplots(1, figsize=(6,5), dpi=300)
+    fig, ax = plt.subplots(1, figsize=(6, 5), dpi=300)
 
     # Camera image area
     camera_view = patches.Rectangle(((-max_w_in / 2), (-max_h_in / 2)),
