@@ -34,7 +34,7 @@ with (st.sidebar):
     # select the camera or digital back name
     st.selectbox(label="Camera body / digital back",
                  key="camera",
-                 options=sensors.keys()
+                 options=sorted(sensors.keys())
                  )
 
     # select the lens focal length
