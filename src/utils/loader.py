@@ -5,8 +5,8 @@
 # Description:
 #
 
-from pathlib import Path
 import json
+from pathlib import Path
 
 from src.models.sensor import Sensor
 
