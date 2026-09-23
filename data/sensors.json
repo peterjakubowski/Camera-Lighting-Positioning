@@ -47,6 +47,18 @@
     "sensor_w_px": 6960,
     "sensor_h_px": 4640
   },
+  "Fujifilm GFX50S II":{
+    "sensor_w_mm": 43.8,
+    "sensor_h_mm" : 32.9,
+    "sensor_w_px": 8256,
+    "sensor_h_px": 6192
+  },
+  "Fujifilm GFX100 II":{
+    "sensor_w_mm": 43.8,
+    "sensor_h_mm" : 32.9,
+    "sensor_w_px": 11648,
+    "sensor_h_px": 8736
+  },
   "Phase One P30+":{
     "sensor_w_mm": 44.2,
     "sensor_h_mm" : 33.1,
