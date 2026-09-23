@@ -7,31 +7,9 @@
 
 import streamlit as st
 import pandas as pd
-import json
 from io import BytesIO
-from pydantic import BaseModel
+from src.utils.loader import sensors
 from src.utils.tools import convert_units, print_measurements, plot_lighting_diagram, calculate_max_ppi
-
-
-# ==============================
-# ======== Sensor Info =========
-# ==============================
-
-
-class Sensor(BaseModel):
-    sensor_w_mm: float
-    sensor_h_mm: float
-    sensor_w_px: int
-    sensor_h_px: int
-
-
-sensors: dict[str, Sensor] = {}
-
-# load the dictionary of digital camera bodies and backs with sensor size and pixel dimensions
-with open("data/sensors.json", "r") as file:
-    sensor_dict = json.loads(file.read())
-    for name, attr in sensor_dict.items():
-        sensors[name] = Sensor(**attr)
 
 # ==============================
 # ========= Streamlit ==========
