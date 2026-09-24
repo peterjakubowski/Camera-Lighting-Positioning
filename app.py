@@ -104,12 +104,11 @@ with (st.sidebar):
               value=2.3
               )
 
+sensor = sensors[st.session_state.camera]
+
 # ==============================
 # ========= Calculate ==========
 # ==============================
-
-sensor = sensors[st.session_state.camera]
-sensor_ratio = sensor.sensor_w_px / sensor.sensor_h_px
 
 # convert real object width and height to inches if provided in cm or mm
 if st.session_state.real_object_units == 'cm':
