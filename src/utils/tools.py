@@ -16,16 +16,17 @@ from numpy import floor
 from src.models.sensor import Sensor
 from src.utils import math
 
-def calculate_max_ppi(sensor, real_object_width, real_object_height):
+
+def calculate_max_ppi(sensor: Sensor, real_object_width: float, real_object_height: float):
     """
 
-    :param sensor:
-    :param real_object_width:
-    :param real_object_height:
+    :param sensor: Sensor object
+    :param real_object_width: Width of the real object in inches
+    :param real_object_height: Height of the real object in inches
     :return:
     """
 
-    sensor_ratio = sensor.sensor_w_px / sensor.sensor_h_px
+    sensor_ratio = math.calculate_sensor_ratio(sensor.sensor_w_px, sensor.sensor_h_px)
     max_w_px = int(floor(sensor.sensor_w_px / real_object_width))
     max_h_px = int(floor(sensor.sensor_h_px / real_object_height))
 
