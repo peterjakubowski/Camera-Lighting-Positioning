@@ -38,7 +38,7 @@ def calculate_max_ppi(sensor: Sensor, real_object_width: float, real_object_heig
 
 def convert_units(measurement: float, unit: Literal["mm", "cm", "inches"] = "inches") -> tuple[float, float, float]:
     """
-    Convert a measurement to mm, cm, and inches
+    Convert a measurement to all three units: cm, mm, and inches
 
     :param measurement: the measurement to convert
     :param unit: string unit of measurement, mm, cm, or in
@@ -46,11 +46,11 @@ def convert_units(measurement: float, unit: Literal["mm", "cm", "inches"] = "inc
     """
 
     if unit == 'cm':
-        measurement = measurement * 0.393701
+        measurement = math.convert_cm_to_inches(measurement)
     elif unit == 'mm':
-        measurement = measurement * 0.0393701
+        measurement = math.convert_mm_to_inches(measurement)
 
-    return measurement / .0393701, measurement / .393701, measurement
+    return math.convert_inches_to_mm(measurement), math.convert_inches_to_cm(measurement), measurement
 
 
 def print_measurements(measurements: tuple[float, float, float]) -> str:
