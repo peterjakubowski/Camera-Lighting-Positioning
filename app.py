@@ -101,7 +101,7 @@ with (st.sidebar):
               min_value=1.0,
               max_value=5.0,
               step=0.05,
-              value=3.0
+              value=2.3
               )
 
 # ==============================
