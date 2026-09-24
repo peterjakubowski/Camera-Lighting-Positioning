@@ -10,6 +10,7 @@ from io import BytesIO
 import pandas as pd
 import streamlit as st
 
+from src.utils import math
 from src.utils.loader import sensors
 from src.utils.tools import (
     calculate_max_ppi,
