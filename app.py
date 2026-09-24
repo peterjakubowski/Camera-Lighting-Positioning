@@ -161,6 +161,9 @@ light_radius = math.calculate_radius_of_rectangle_inside_circle(
     real_object_width * st.session_state.radius_multiply,
     real_object_height * st.session_state.radius_multiply
 )
+# calculate the radius of the rectangle in view, what the sensor sees, the image area
+radius_in_view = math.calculate_radius_of_rectangle_inside_circle(max_w_in, max_h_in)
+
 # Convert degrees to radians for Python's math functions
 angle_radians = math.convert_angle_degrees_to_radians(st.session_state.light_angle)
 
@@ -174,8 +177,6 @@ light_distance_y_axis = math.calculate_light_position_y_axis(light_radius, y_mul
 # ====== Warnings =======
 # =======================
 
-# calculate the radius of the rectangle in view, what the sensor sees, the image area
-radius_in_view = math.calculate_radius_of_rectangle_inside_circle(max_w_in, max_h_in)
 
 # check light coverage, does the light cover everything in the camera's view?
 if light_radius < radius_in_view:
