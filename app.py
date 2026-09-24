@@ -15,9 +15,9 @@ from src.utils.loader import sensors
 from src.utils.tools import (
     calculate_max_ppi,
     convert_units,
-    plot_lighting_diagram,
     print_measurements,
 )
+from src.utils.viz import plot_lighting_diagram
 
 # ==============================
 # ========= Streamlit ==========
