@@ -104,6 +104,7 @@ with (st.sidebar):
               value=2.3
               )
 
+# sensor object for the selected camera/sensor
 sensor = sensors[st.session_state.camera]
 
 # ==============================
@@ -138,7 +139,7 @@ object_w_on_film_mm = math.calculate_object_mm_size_on_sensor(object_w_px, senso
 object_h_on_film_mm = math.calculate_object_mm_size_on_sensor(object_h_px, sensor.sensor_h_mm, sensor.sensor_h_px)
 
 # calculate object resolution by dividing object in pixels by object in inches (should equal set_ppi value)
-PPI = math.calculate_resolution_pixels_per_inch(object_w_px, real_object_width)
+pixels_per_inch = math.calculate_resolution_pixels_per_inch(object_w_px, real_object_width)
 
 # calculate distance from camera to object
 # multiply object width by lens focal length and divide by object size on sensor
@@ -149,8 +150,8 @@ camera_distance = math.calculate_camera_distance_to_object_inches(
 sensor_usage_w = math.calculate_sensor_usage_percent(object_w_on_film_mm, sensor.sensor_w_mm)
 sensor_usage_h = math.calculate_sensor_usage_percent(object_h_on_film_mm, sensor.sensor_h_mm)
 # calculate the width and height dimensions of what is in view
-max_w_in = sensor.sensor_w_px / PPI
-max_h_in = sensor.sensor_h_px / PPI
+max_w_in = sensor.sensor_w_px / pixels_per_inch
+max_h_in = sensor.sensor_h_px / pixels_per_inch
 
 # Radius calculation
 object_radius = math.calculate_radius_of_rectangle_inside_circle(real_object_width, real_object_height)
@@ -173,7 +174,7 @@ light_distance_y_axis = math.calculate_light_position_y_axis(light_radius, y_mul
 # ====== Warnings =======
 # =======================
 
-# calculate the radius of the rectangle in view, what the sensor sees
+# calculate the radius of the rectangle in view, what the sensor sees, the image area
 radius_in_view = math.calculate_radius_of_rectangle_inside_circle(max_w_in, max_h_in)
 
 # check light coverage, does the light cover everything in the camera's view?
@@ -227,7 +228,7 @@ summary = [("Camera", st.session_state.camera),
            ("Object width", f"{print_measurements(convert_units(real_object_width, "inches"))}"),
            ("Object height", f"{print_measurements(convert_units(real_object_height, "inches"))}"),
            ("Object dimensions pixels", f"{object_w_px} x {object_h_px}"),
-           ("Object resolution (ppi)", f"{PPI}")
+           ("Object resolution (ppi)", f"{pixels_per_inch}")
            ]
 
 df = pd.DataFrame(data=summary, columns=[0, 1])
