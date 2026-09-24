@@ -46,7 +46,7 @@ with (st.sidebar):
                  )
 
     # select the lens focal length
-    st.selectbox(label="Lens focal length",
+    st.selectbox(label="Lens focal length (mm)",
                  key="lens_focal_len_mm",
                  options=[24, 45, 50, 55, 85, 90, 100, 105, 110, 120, 135, 150, 200, 240],
                  index=7
