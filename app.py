@@ -211,7 +211,9 @@ lighting_diagram.savefig(buf, format='png')
 # Display the figure buffer image
 st.image(buf)
 
-# st.pyplot(fig=lighting_diagram)
+# ======================
+# ====== Summary =======
+# ======================
 
 summary = [("Camera", st.session_state.camera),
            ("Lens focal length", f"{st.session_state.lens_focal_len_mm}mm"),
@@ -219,9 +221,9 @@ summary = [("Camera", st.session_state.camera),
            ("Sensor size pixels", f"{sensor.sensor_w_px} x {sensor.sensor_h_px}"),
            ("Sensor usage width", f"{sensor_usage_w}%"),
            ("Sensor usage height", f"{sensor_usage_h}%"),
-           ("Camera to object distance", f"{print_measurements(convert_units(distance, "inches"))}"),
-           ("Lights distance x", f"{print_measurements(convert_units(light_1x, "inches"))}"),
-           ("Lights distance y", f"{print_measurements(convert_units(light_1y, "inches"))}"),
+           ("Camera to object distance", f"{print_measurements(convert_units(camera_distance, "inches"))}"),
+           ("Lights distance x", f"{print_measurements(convert_units(light_distance_x_axis, "inches"))}"),
+           ("Lights distance y", f"{print_measurements(convert_units(light_distance_y_axis, "inches"))}"),
            ("Object width", f"{print_measurements(convert_units(real_object_width, "inches"))}"),
            ("Object height", f"{print_measurements(convert_units(real_object_height, "inches"))}"),
            ("Object dimensions pixels", f"{object_w_px} x {object_h_px}"),
