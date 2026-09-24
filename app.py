@@ -124,11 +124,6 @@ else:
     real_object_width = st.session_state.real_object_width
     real_object_height = st.session_state.real_object_height
 
-# check max ppi
-if st.session_state.set_ppi > (max_ppi := calculate_max_ppi(sensor, real_object_width, real_object_height)):
-    st.warning(f"Warning! The object does not fit in frame at {st.session_state.set_ppi}ppi. "
-               f"The maximum possible ppi is {max_ppi}")
-
 # calculate object width and height in pixels by multiplying ppi by object measurements in inches
 object_w_px = math.calculate_object_pixels(st.session_state.set_ppi, real_object_width)
 object_h_px = math.calculate_object_pixels(st.session_state.set_ppi, real_object_height)
@@ -177,6 +172,10 @@ light_distance_y_axis = math.calculate_light_position_y_axis(light_radius, y_mul
 # ====== Warnings =======
 # =======================
 
+# check max ppi
+if st.session_state.set_ppi > (max_ppi := calculate_max_ppi(sensor, real_object_width, real_object_height)):
+    st.warning(f"Warning! The object does not fit in frame at {st.session_state.set_ppi}ppi. "
+               f"The maximum possible ppi is {max_ppi}")
 
 # check light coverage, does the light cover everything in the camera's view?
 if light_radius < radius_in_view:
