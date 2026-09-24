@@ -65,9 +65,9 @@ def print_measurements(measurements: tuple[float, float, float]) -> str:
 
     mm, cm, inches = measurements
     string = ""
-    string += str(round(mm, 2)) + " mm / "
-    string += str(round(cm, 2)) + " cm / "
-    string += str(round(inches, 2)) + " in / "
+    string += str(round(mm, 2)) + " mm | "
+    string += str(round(cm, 2)) + " cm | "
+    string += str(round(inches, 2)) + " in | "
     if inches // 12 > 0:
         string += str(int(inches // 12)) + " ft"
     if floor(inches % 12) > 0:
