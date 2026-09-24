@@ -6,7 +6,6 @@
 #
 
 
-import math
 from fractions import Fraction
 from typing import Literal
 
@@ -14,6 +13,8 @@ import matplotlib.pyplot as plt
 from matplotlib import lines, patches
 from numpy import floor
 
+from src.models.sensor import Sensor
+from src.utils import math
 
 def calculate_max_ppi(sensor, real_object_width, real_object_height):
     """
