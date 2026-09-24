@@ -146,8 +146,8 @@ camera_distance = math.calculate_camera_distance_to_object_inches(
     real_object_width, object_w_on_film_mm, st.session_state.lens_focal_len_mm)
 
 # calculate how much of the sensor is used
-sensor_usage_w = round((object_w_on_film_mm / sensor.sensor_w_mm) * 100, 2)
-sensor_usage_h = round((object_h_on_film_mm / sensor.sensor_h_mm) * 100, 2)
+sensor_usage_w = math.calculate_sensor_usage_percent(object_w_on_film_mm, sensor.sensor_w_mm)
+sensor_usage_h = math.calculate_sensor_usage_percent(object_h_on_film_mm, sensor.sensor_h_mm)
 # calculate the width and height dimensions of what is in view
 max_w_in = sensor.sensor_w_px / PPI
 max_h_in = sensor.sensor_h_px / PPI
