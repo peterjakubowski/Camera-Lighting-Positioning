@@ -19,9 +19,9 @@ from src.utils.tools import (
 )
 from src.utils.viz import plot_lighting_diagram
 
-# ==============================
-# ========= Streamlit ==========
-# ==============================
+# =============================
+# ===== Streamlit config ======
+# =============================
 
 st.set_page_config(
     page_title="Camera and Lighting Positioning",
