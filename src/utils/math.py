@@ -86,6 +86,11 @@ def calculate_light_position_y_axis(radius: float, multiplier: float) -> float:
     return radius * multiplier
 
 
+def calculate_sensor_usage_percent(object_mm: float, sensor_mm: float) -> float:
+
+    return round((object_mm / sensor_mm) * 100, 2)
+
+
 def calculate_radius_of_rectangle_inside_circle(width: int, height: int) -> float:
     """
     Calculate the radius of a circumscribed rectangle (a rectangle inside a circle).
