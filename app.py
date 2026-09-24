@@ -190,17 +190,19 @@ if object_w_on_film_mm > sensor.sensor_w_mm:
 if object_h_on_film_mm > sensor.sensor_h_mm:
     st.warning("Warning! The object height does not fit in frame.")
 
-lighting_diagram, light_1x, light_1y = plot_lighting_diagram(real_object_width,
-                                                             real_object_height,
-                                                             st.session_state.light_angle,
-                                                             st.session_state.radius_multiply,
-                                                             distance,
-                                                             max_w_in,
-                                                             max_h_in)
-
 # ============================
 # ====== Plot diagrams =======
 # ============================
+
+lighting_diagram = plot_lighting_diagram(
+    real_object_width=real_object_width,
+    real_object_height=real_object_height,
+    radius=light_radius,
+    distance=camera_distance,
+    light_1x=light_distance_x_axis,
+    light_1y=light_distance_y_axis,
+    max_w_in=max_w_in,
+    max_h_in=max_h_in)
 
 # Create a buffer for the figure
 buf = BytesIO()
