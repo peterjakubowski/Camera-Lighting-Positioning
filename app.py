@@ -112,12 +112,12 @@ sensor = sensors[st.session_state.camera]
 
 # convert real object width and height to inches if provided in cm or mm
 if st.session_state.real_object_units == 'cm':
-    real_object_width = st.session_state.real_object_width * 0.393701
-    real_object_height = st.session_state.real_object_height * 0.393701
+    real_object_width = math.convert_cm_to_inches(st.session_state.real_object_width)
+    real_object_height = math.convert_cm_to_inches(st.session_state.real_object_height)
 
 elif st.session_state.real_object_units == 'mm':
-    real_object_width = st.session_state.real_object_width * 0.0393701
-    real_object_height = st.session_state.real_object_height * 0.0393701
+    real_object_width = math.convert_mm_to_inches(st.session_state.real_object_width)
+    real_object_height = math.convert_mm_to_inches(st.session_state.real_object_height)
 
 else:
     real_object_width = st.session_state.real_object_width
@@ -129,21 +129,21 @@ if st.session_state.set_ppi > (max_ppi := calculate_max_ppi(sensor, real_object_
                f"The maximum possible ppi is {max_ppi}")
 
 # calculate object width and height in pixels by multiplying ppi by object measurements in inches
-object_w_px = int(st.session_state.set_ppi * real_object_width)
-object_h_px = int(st.session_state.set_ppi * real_object_height)
+object_w_px = math.calculate_object_pixels(st.session_state.set_ppi, real_object_width)
+object_h_px = math.calculate_object_pixels(st.session_state.set_ppi, real_object_height)
 
 # calculate object width and height in mm on sensor by multiplying sensor size in mm by object
 # size in pixels and dividing by the sensor size in pixels
-object_w_on_film_mm = (sensor.sensor_w_mm * object_w_px) / sensor.sensor_w_px
-object_h_on_film_mm = (sensor.sensor_h_mm * object_h_px) / sensor.sensor_h_px
+object_w_on_film_mm = math.calculate_object_mm_size_on_sensor(object_w_px, sensor.sensor_w_mm, sensor.sensor_w_px)
+object_h_on_film_mm = math.calculate_object_mm_size_on_sensor(object_h_px, sensor.sensor_h_mm, sensor.sensor_h_px)
 
 # calculate object resolution by dividing object in pixels by object in inches (should equal set_ppi value)
-PPI = object_w_px / real_object_width
+PPI = math.calculate_resolution_pixels_per_inch(object_w_px, real_object_width)
 
-# calculate camera distance to object by multiplying object width by lens focal length and dividing
-# by object size on sensor
-distance = (real_object_width * st.session_state.lens_focal_len_mm) / object_w_on_film_mm
-# distance_ft_in = int(distance/12)
+# calculate distance from camera to object
+# multiply object width by lens focal length and divide by object size on sensor
+camera_distance = math.calculate_camera_distance_to_object_inches(
+    real_object_width, object_w_on_film_mm, st.session_state.lens_focal_len_mm)
 
 # calculate sensor usage
 sensor_usage_w = round((object_w_on_film_mm / sensor.sensor_w_mm) * 100, 2)
