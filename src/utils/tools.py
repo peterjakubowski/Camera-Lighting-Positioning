@@ -15,7 +15,7 @@ from src.models.sensor import Sensor
 from src.utils import math
 
 
-def calculate_max_ppi(sensor: Sensor, real_object_width: float, real_object_height: float):
+def calculate_max_ppi(sensor: Sensor, real_object_width: float, real_object_height: float) -> int:
     """
 
     :param sensor: Sensor object
