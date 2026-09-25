@@ -1,3 +1,5 @@
+![Run Python Tests](https://github.com/peterjakubowski/Camera-Lighting-Positioning/actions/workflows/ci.yaml/badge.svg)
+
 # Camera and Lighting Positioning Calculator
 
 "Measure twice. Light once."
