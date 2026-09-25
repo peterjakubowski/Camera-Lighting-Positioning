@@ -55,7 +55,7 @@ with (st.sidebar):
     # set the object width, physical measurement
     st.number_input(label="Object width",
                     key="real_object_width",
-                    min_value=0.0,
+                    min_value=0.01,
                     max_value=100000.0,
                     step=0.01,
                     value=10.00
@@ -64,7 +64,7 @@ with (st.sidebar):
     # set the object height, physical measurement
     st.number_input(label="Object height",
                     key="real_object_height",
-                    min_value=0.0,
+                    min_value=0.01,
                     max_value=100000.0,
                     step=0.01,
                     value=8.00
