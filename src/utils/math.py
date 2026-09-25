@@ -51,7 +51,7 @@ def calculate_object_pixels(ppi: int, object_inches: float) -> int:
     return int(ppi * object_inches)
 
 
-def calculate_object_mm_size_on_sensor(object_px: int, sensor_mm: float, sensor_px: float) -> float:
+def calculate_object_mm_size_on_sensor(object_px: int, sensor_mm: float, sensor_px: int) -> float:
 
     return (sensor_mm * object_px) / sensor_px
 
