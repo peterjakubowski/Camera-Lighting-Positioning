@@ -187,9 +187,9 @@ if light_radius < radius_in_view:
 
 # check that the object fits in the frame
 if object_w_on_film_mm > sensor.sensor_w_mm:
-    st.warning("Warning! The object width does not fit in frame.")
+    st.warning("Warning! The object **width** does not fit in frame.")
 if object_h_on_film_mm > sensor.sensor_h_mm:
-    st.warning("Warning! The object height does not fit in frame.")
+    st.warning("Warning! The object **height** does not fit in frame.")
 
 # ============================
 # ====== Plot diagrams =======
