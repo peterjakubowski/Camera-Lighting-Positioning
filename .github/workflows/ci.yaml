@@ -44,9 +44,7 @@ jobs:
 
       - name: Run MyPy
         run: |
-          mypy --install-types
-          mypy src/
-          mypy app.py
+          mypy --install-types --non-interactive src/ app.py
   test:
     name: Unit Tests Python ${{ matrix.python-version }}
     needs: ruff
