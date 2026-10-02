@@ -1,4 +1,6 @@
 ![Run Python Tests](https://github.com/peterjakubowski/Camera-Lighting-Positioning/actions/workflows/ci.yaml/badge.svg)
+<a href="https://camera-lighting-positioning.streamlit.app/" title="Streamlit Community Cloud"><img src="https://static.streamlit.io/badges/streamlit_badge_black_white.svg"></a>
+
 
 # Camera and Lighting Positioning Calculator
 
