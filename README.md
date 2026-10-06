@@ -15,7 +15,7 @@ Achieving a specific resolution (PPI) while ensuring even lighting coverage invo
 * **Precision Positioning:** Calculate the exact distance required between the camera sensor and the artwork to achieve a target PPI.  
 * **Lighting Geometry:** Determine optimal light placement (X and Y coordinates relative to the art) to ensure full coverage based on the artwork's dimensions.  
 * **Sensor Visualization:** Visual feedback on how much of the camera sensor is utilized by the artwork.  
-* **Resolution Limits:** Instantly see the maximum possible PPI for a given lens/camera combination before hitting physical limits.  
+* **Resolution Limits:** See the maximum possible PPI for a given lens/camera combination.  
 * **Diagram Generation:** Auto-generates a downloadable Matplotlib diagram of your specific setup.
 
 ## Quick Start
@@ -32,7 +32,7 @@ To run the tool on your own machine, follow these steps:
 
 1. **Clone the repository:**  
    ```commandline
-   git clone [https://github.com/peterjakubowski/Camera-Lighting-Positioning.git](https://github.com/peterjakubowski/Camera-Lighting-Positioning.git)  
+   git clone https://github.com/peterjakubowski/Camera-Lighting-Positioning.git  
    cd Camera-Lighting-Positioning
    ```
 
